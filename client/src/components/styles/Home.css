@@ -1,3 +1,8 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 .test{
     color: rgb(146, 34, 34);
     background-image: url('./images/1.jpg');
