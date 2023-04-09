@@ -6,7 +6,7 @@ export default function SignUp() {
   
   const [formData, setFormData] = useState({ email: '', password: '', username:''});
   const [errors, setErrors] = useState({});
-  const [errorMessage, setErrorMessage] = useState('');
+  const [Message, setMessage] = useState('');
 
   
   /*const navigate = useNavigate();*/
@@ -50,14 +50,14 @@ export default function SignUp() {
         body: JSON.stringify(formData),
       })
       if (response.ok) {
-        alert('Message sent successfully!');
+        setMessage(response.data.message);
         setFormData({ email: '', password: '', username: ''});
       } else {
         alert('An error occurred while sending the message.');
       }
     } catch (error) {
       console.error(error);
-      alert('An error occurred while sending the message.');
+      setMessage(error.response.data.message);
     }
   };
 
@@ -88,6 +88,7 @@ export default function SignUp() {
                 {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
 
                 <button className='button-31' type="submit">Sign Up</button>
+                <h3>{Message}</h3>
               </form>
             </div>
         </div>
