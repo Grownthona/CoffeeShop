@@ -1,31 +1,44 @@
-import React from 'react'
-import Home from './components/Home';
-/*import React,{useEffect,useState} from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Route,Routes} from 'react-router-dom';
+import Home from './components/Home/Home';
+import SignUp from './components/Login/SignUp';
+//import Test from './components/Test';
+/*
+import React,{useEffect,useState} from 'react'
 
-function App() {
-  const [backendData,setbackendData] = useState([{}])
-  //fetching backend api
-  useEffect(() =>{
+function App(){
+  const[backendData,setBackendData] = useState([{}]);
+
+  useEffect(()=>{
     fetch("/api").then(
       response => response.json()
     ).then(
-      data =>{
-        setbackendData(data);
+      data => {
+        setBackendData(data);
       }
     )
   },[])
-  return (
-    <div className="App">
-       {backendData.users[0]}
+  
+  return(
+    <div className='App'>
+      {backendData.users.map((user,i)=>(
+        <p key={i}>{user}</p>
+       ))}
     </div>
-  );
+  )
 }
 */
+
+
 function App() {
   return(
-    <div className="App">
-       <Home></Home>
-    </div>
+    <Router>
+       <Routes>
+        <Route path='/' element={<Home/>}></Route>
+        <Route path='/SignUp' element={<SignUp/>}></Route>
+      </Routes>
+    </Router>
+    
   )
 }
 

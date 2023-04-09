@@ -1,32 +1,30 @@
 const express = require("express");
+const mongoose = require('mongoose');
+
+const cors = require("cors");
 const app = express();
-//var admin = express() // the sub app
-//const handle = require('./handle');
-//app.use(express.urlencoded());
 
-/*app.locals.title = 'MyApp';
-app.get('/',handle);
+app.use(cors({
+  origin:"http://localhost:3000",
+}))
+app.use(express.json());
+
+const usersRouter = require('./routes/users');
+    
+app.use('/users', usersRouter);
+mongoose
+  .connect(
+    'mongodb+srv://mongr:yw46DNwYWt4@cluster0.htcqlu9.mongodb.net/?retryWrites=true&w=majority'
+  )
+  .then(result => {
+    console.log("MongoDB database connection established successfully");
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
 app.get("/api",(req,res)=>{
-    console.log(app.locals.title);
-    res.json({"users":["userOne","userTwo","userThree"]})
+  res.json({"users":["userOne","userTwo","userThree"]});
 })
-app.post('/',(req,res) =>{
-    console.log(req.body);
-    res.send('This is home page with post request');
-})
-*/
-
-/*
-                                mounting
-
- admin.get('/', (req, res)=>{
-    console.log(admin.mountpath) // /admin
-    res.send('Admin Homepage')
-  })
-  app.get('/',(req,res)=>{
-    res.send('User Homepage')
-  })
-  app.use('/admin', admin) // mount the sub app
-  */
-
+    
 app.listen(5000,()=>{console.log("Server started on port 5000")})
