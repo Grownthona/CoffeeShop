@@ -50,14 +50,15 @@ export default function SignUp() {
         body: JSON.stringify(formData),
       })
       if (response.ok) {
-        setMessage(response.data.message);
+        setMessage(await response.json());
         setFormData({ email: '', password: '', username: ''});
       } else {
+        setMessage(await response.json());
         alert('An error occurred while sending the message.');
       }
     } catch (error) {
       console.error(error);
-      setMessage(error.response.data.message);
+      setMessage(error);
     }
   };
 

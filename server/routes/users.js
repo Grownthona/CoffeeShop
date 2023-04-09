@@ -17,16 +17,16 @@ router.route('/add').post(async(req, res) => {
   try {
     const user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({ message: 'Email already exists' });
+      return res.status(400).json('Email already exists' );
     }
     const newUser = new User({email,password,username});
   
     await newUser.save();
-    return res.status(201).json({ message: 'User created successfully' });
+    return res.status(201).json('User created successfully' );
     //.then(() => res.json('User added!'))
     //.catch(err => res.status(400).json('Error: ' + err));
   } catch(err){
-    return res.status(400).json({ message: err });
+    return res.status(400).json(err);
   }
 });
 
