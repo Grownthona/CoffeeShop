@@ -6,6 +6,7 @@ export default function SignUp() {
   
   const [formData, setFormData] = useState({ email: '', password: '', username:''});
   const [errors, setErrors] = useState({});
+  const [errorMessage, setErrorMessage] = useState('');
 
   
   /*const navigate = useNavigate();*/
