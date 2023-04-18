@@ -14,9 +14,11 @@ app.use(express.static('uploads'));
 
 const usersRouter = require('./routes/users');
 const fileRouter = require('./routes/uploads');
+const productRouter = require('./routes/products')
     
 app.use('/users', usersRouter);
 app.use('/api/',fileRouter);
+app.use('/products/',productRouter);
 mongoose
   .connect(
     'mongodb+srv://mongr:yw46DNwYWt4@cluster0.htcqlu9.mongodb.net/image?retryWrites=true&w=majority'

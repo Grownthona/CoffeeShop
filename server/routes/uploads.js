@@ -35,9 +35,7 @@ router.get('/images', async(req, res) => {
 }
 )
 router.post('/upload', upload.single('testImage'), (req, res) => {
-  //const filePath = req.file.path;
-  //res.send(filePath);
-    const filePath = req.file.filename;
+
     const saveImage = new imageModel({
     name: req.body.name,
     image : {

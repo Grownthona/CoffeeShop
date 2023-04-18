@@ -3,7 +3,7 @@ import React, { useState ,useEffect} from 'react';
 import axios from 'axios';
 
 
-export default function ImageUploadForm() {
+  export default function ImageUploadForm() {
   const [file, setFile] = useState(null);
   const [imageData, setImageData] = useState([]);
   const[newdata,setData] = useState("")
