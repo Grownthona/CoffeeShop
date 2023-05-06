@@ -1,4 +1,3 @@
-
 import React, { useState ,useEffect} from 'react';
 import axios from 'axios';
 
@@ -12,8 +11,8 @@ import axios from 'axios';
     setData(e.target.value);
   };
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-    console.log(e.target.files[0]);
+    setFile(e.target.files);
+    console.log(e.target.files);
   };
   
     useEffect(() => {
@@ -71,12 +70,12 @@ import axios from 'axios';
     <div>
     {imageData && (imageData.map((singleData,index) => {
         
-         const base64Data = btoa(String.fromCharCode(...new Uint8Array(singleData.image.data.data))
-         );
-          
-        return <img key={index} src={`data:${singleData.image.contentType};base64,${base64Data}`} alt='lala'/>
-        }
-    ))}
+        const base64Data = btoa(String.fromCharCode(...new Uint8Array(singleData.images.data.data))
+        );
+         
+       return <img key={index} src={`data:${singleData.images.contentType};base64,${base64Data}`} alt='lala'/>
+       }
+   ))}
     </div>
    </div>
   );

@@ -6,7 +6,8 @@ import SignIn from './components/Login/SignIn';
 import Product from './components/Products/Product';
 //import ImageUploadForm from './ImageUploadForm';
 import ProductDetails from './components/Products/ProductDetails';
-import ImageResize from './ImageResize';
+//import ImageResize from './ImageResize';
+import UploadForm from './UploadForm';
 //import Test from './components/Test';
 /*
 import React,{useEffect,useState} from 'react'
@@ -39,7 +40,7 @@ function App() {
   return(
     <Router>
        <Routes>
-        <Route exact path='/' element={<ImageResize/>}></Route>
+        <Route exact path='/' element={<UploadForm/>}></Route>
         <Route path='/SignUp' element={<SignUp/>}></Route>
         <Route path='/SignIn' element={<SignIn/>}></Route>
         <Route path='/Products' element={<Product/>}></Route>
