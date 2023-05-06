@@ -5,15 +5,10 @@ import axios from "axios";
 const UploadForm = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [img, setImages] = useState([]);
+    const [posts, setImages] = useState([]);
     const [selectedImages, setSelectedImages] = useState([]);
 
-    const handle= (value) => {
-
-      img.map((image, index) => (
-        console.log(image.title)
-      ));
-    }
+    
     useEffect(() => {
       async function fetchData() {
         try {
@@ -72,7 +67,19 @@ const UploadForm = () => {
       </label>
       <button type="submit">Upload</button>
     </form>
-    <button onClick={handle}>Work</button>
+    
+
+    {posts.map((post) => (
+        <div key={post._id}>
+          <h2>{post.title}</h2>
+          <p>{post.content}</p>
+          {post.images.map((image, index) => {
+            const base64Data = btoa(String.fromCharCode(...new Uint8Array(image.data.data))
+            );
+            return <img key={index} src={`data:${image.contentType};base64,${base64Data}`} alt='lala'/>
+          })}
+        </div>
+      ))}
     </div>
   );
 };
