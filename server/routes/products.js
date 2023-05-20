@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 let Product = require('../models/productmodel');
+const CartItem = require('../models/cartItem');
 
 router.route('/').get(async(req, res) => {
     await Product.find({'products.category': 'coffee'})
@@ -17,6 +18,22 @@ router.route('/').get(async(req, res) => {
       console.error(error);
       res.status(500).json({ message: 'Server Error' });
     }
+    });
+
+    router.route('/addcart').post(async (req, res) => {
+      const { productId, quantity } = req.body;
+    
+      try {
+        const cartItem = new CartItem({
+          productId,
+          quantity
+        });
+        await cartItem.save();
+        return res.status(201).send(cartItem);
+      } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+      }
     });
 
   

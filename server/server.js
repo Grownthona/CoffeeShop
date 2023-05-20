@@ -14,8 +14,8 @@ app.use(express.static('uploads'));
 
 const usersRouter = require('./routes/users');
 const fileRouter = require('./routes/uploads');
-const productRouter = require('./routes/products')
-const multiimg = require('./routes/multipleimage')
+const productRouter = require('./routes/products');
+const multiimg = require('./routes/multipleimage');
     
 app.use('/users', usersRouter);
 app.use('/api/',fileRouter);
