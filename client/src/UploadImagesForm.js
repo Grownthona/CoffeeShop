@@ -43,10 +43,13 @@ import axios from 'axios';
 
     const formData = new FormData();
     formData.append('name', newdata);
+    formData.append('name', newdata);
+    formData.append('name', newdata);
+    formData.append('name', newdata);
     formData.append('testImage',file);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/upload', formData)
+      const response = await axios.post('http://localhost:5000/products/addproduct', formData)
       console.log(response.data); // the uploaded image file path or URL
     } catch (error) {
       console.error(error);
@@ -64,6 +67,9 @@ import axios from 'axios';
     <form onSubmit={handleSubmit}>
       <input type="file" onChange={handleFileChange} name='testImage'/>
       <input type="text" onChange={handleChange} name='name'/>
+      <input type="text" onChange={handleChange} name='price'/>
+      <input type="text" onChange={handleChange} name='details'/>
+      <input type="text" onChange={handleChange} name='catagory'/>
       <button type="submit">Upload</button>
     </form>
 

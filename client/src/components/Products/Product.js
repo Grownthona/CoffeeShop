@@ -34,10 +34,13 @@ export default function Product(){
                 <div className="filter-box">
                 </div>
                 <div className="product-box">
-                {product && product.map((item, index) => (
-                   
+                {product && product.map((item, index) => {
+                    const base64Data = btoa(String.fromCharCode(...new Uint8Array(item.imageSrc.data.data))
+                    );
+                    return(
                     <div className="card" key={index}>
-                    <img src={item.imageSrc} alt="" />
+                        
+                    <img src={`data:${item.imageSrc.contentType};base64,${base64Data}`} alt="lala" />
                         <div className="card-body">
                             <div className="row">
                                 <div className="card-title">
@@ -58,7 +61,8 @@ export default function Product(){
                             </div>
                         </div>
                     </div>
-                    ))}
+                    )
+})}
                 </div>
             </div>
         </div>

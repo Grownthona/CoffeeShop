@@ -1,7 +1,36 @@
 const router = require('express').Router();
 
+const multer = require('multer');
+const path = require('path');
+var fs = require('fs');
+
 let Product = require('../models/productmodel');
 const CartItem = require('../models/cartItem');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) =>{
+    cb(null, 'uploads');
+  },
+  limits: { fileSize: 9 * 1024 * 1024 },
+  filename:(req, file, cb)=> {
+    //const ext = path.extname(file.originalname);
+    //cb(null, Date.now() + ext);
+     cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage,
+  fileFilter: function(req, file, cb) {
+    const filetypes = /jpeg|jpg|png/;
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    if (mimetype && extname) {
+      return cb(null, extname);
+    }
+    cb(new Error('Only JPEG, JPG, and PNG files are allowed'));
+  }
+});
+
 
 router.route('/').get(async(req, res) => {
     await Product.find({'products.category': 'coffee'})
@@ -38,14 +67,17 @@ router.route('/').get(async(req, res) => {
 
   
 
-  router.route('/addproduct').post(async(req, res) => {
+  router.route('/addproduct').post(upload.single('testImage'),async(req, res) => {
     //const {name,price,imageSrc,details,category} = req.body;
     const newProduct = new Product({
-        name: 'Cappuccino',
-        price: 10.99,
-        imageSrc: 'https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fit,w_730,h_913/k%2FPhoto%2FRecipe%20Ramp%20Up%2F2022-07-Cappuccino%2FCappuccino-5',
-        details: 'A cappuccino is an espresso-based coffee drink and is traditionally prepared with steamed milk foam. Variations of the drink involve the use of cream instead of milk, using non-dairy milk substitutes and flavoring with cinnamon or chocolate powder.',
-        category: 'Coffee'
+        name: req.body.name,
+        price: req.body.price,
+        imageSrc: {
+          data: fs.readFileSync('uploads/' + req.file.filename),
+          contentType: req.file.mimetype
+        },
+        details: req.body.details,
+        category: req.body.category
       });
       newProduct.save((err) => {
         if (err) {
