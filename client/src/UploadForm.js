@@ -1,4 +1,3 @@
-
 import React, { useState,useEffect } from "react";
 import axios from "axios";
 
@@ -14,8 +13,7 @@ const UploadForm = () => {
         try {
           const response = await axios.get('http://localhost:5000/multi/images');
           setImages(response.data);
-      
-          console.log(response.data);
+          //console.log(response.data);
         } catch (error) {
           console.log(error);
         }
