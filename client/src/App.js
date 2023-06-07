@@ -9,6 +9,7 @@ import ProductDetails from './components/Products/ProductDetails';
 //import ImageResize from './ImageResize';
 import UploadForm from './UploadForm';
 //import Test from './components/Test';
+import Cart from './components/Cart/Cart';
 /*
 import React,{useEffect,useState} from 'react'
 
@@ -45,6 +46,7 @@ function App() {
         <Route path='/SignIn' element={<SignIn/>}></Route>
         <Route path='/Products' element={<Product/>}></Route>
         <Route path='/productsdetail/:id' element={<ProductDetails/>}></Route>
+        <Route path='/cart/:id' element={<Cart/>}></Route>
       </Routes>
     </Router>
     

@@ -7,6 +7,15 @@ var fs = require('fs');
 let Product = require('../models/productmodel');
 const CartItem = require('../models/cartItem');
 
+router.get('/cart', async (req, res) => {
+  try {
+    const cartItems = await CartItem.find().populate('productId');;
+    res.send(cartItems);
+  } catch (err) {
+    console.error(err);
+  }
+})
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) =>{
     cb(null, 'uploads');
@@ -37,6 +46,7 @@ router.route('/').get(async(req, res) => {
       .then(data => res.json(data))
       .catch(err => res.status(400).json('Error: ' + err));
   });
+  
   router.get('/productsdetail/:id', async(req, res) => {
     // Retrieve the product details from the database based on the ID
     const productId = req.params.id;
@@ -64,8 +74,6 @@ router.route('/').get(async(req, res) => {
         res.status(500).send('Server error');
       }
     });
-
-  
 
   router.route('/addproduct').post(upload.single('testImage'),async(req, res) => {
     //const {name,price,imageSrc,details,category} = req.body;

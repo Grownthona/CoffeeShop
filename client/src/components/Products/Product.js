@@ -26,8 +26,7 @@ export default function Product(){
             },
             body: JSON.stringify({ productId, quantity })
           });
-      };
-
+        };
         return (
         <div>
             <div className="container">
@@ -54,7 +53,7 @@ export default function Product(){
                             </div>
                             <div className="btn-group">
                                 <div className="btn">
-                                    <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
+                                    <Link onClick={() => handleAddToCart(item)} to={`/cart/${item._id}`}>Add to Cart</Link>
                                     <input type="number" value={quantity} onChange={e => setQuantity(e.target.value)}/>
                                     <Link to={`/productsdetail/${item._id}`}>View Details</Link>
                                 </div>
@@ -62,7 +61,7 @@ export default function Product(){
                         </div>
                     </div>
                     )
-})}
+                    })}
                 </div>
             </div>
         </div>
