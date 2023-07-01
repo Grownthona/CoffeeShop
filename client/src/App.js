@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route,Routes} from 'react-router-dom';
-//import Home from './components/Home/Home';
+import Home from './components/Home/Home';
 import SignUp from './components/Login/SignUp';
 import SignIn from './components/Login/SignIn';
 import Product from './components/Products/Product';
 //import ImageUploadForm from './ImageUploadForm';
 import ProductDetails from './components/Products/ProductDetails';
 //import ImageResize from './ImageResize';
-import UploadForm from './UploadForm';
+//import UploadForm from './UploadForm';
 //import Test from './components/Test';
 import Cart from './components/Cart/Cart';
 /*
@@ -41,7 +41,7 @@ function App() {
   return(
     <Router>
        <Routes>
-        <Route exact path='/' element={<UploadForm/>}></Route>
+        <Route exact path='/' element={<Home/>}></Route>
         <Route path='/SignUp' element={<SignUp/>}></Route>
         <Route path='/SignIn' element={<SignIn/>}></Route>
         <Route path='/Products' element={<Product/>}></Route>

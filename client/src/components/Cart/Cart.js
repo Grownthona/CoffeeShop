@@ -1,3 +1,4 @@
+
 import React, { useState ,useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -22,10 +23,8 @@ export default function Cart() {
         
         {product && product.map((item, index) => {
                   
-                    return(
+        return(
                     <div className="card" key={index}>
-                        
-                   
                         <div className="card-body">
                             <div className="row">
                                 <div className="card-title">
@@ -35,7 +34,6 @@ export default function Cart() {
                                     <p>{item.quantity}</p>
                                 </div>
                             </div>
-                           
                         </div>
                     </div>
                     )
