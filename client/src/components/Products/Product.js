@@ -29,10 +29,9 @@ export default function Product(){
         };
         return (
         <div>
-
-            
             <div className="container">
                 <div className="filter-box">
+                    
                 </div>
                 <div className="product-box">
                 {product && product.map((item, index) => {
@@ -58,6 +57,7 @@ export default function Product(){
                                     <Link onClick={() => handleAddToCart(item)} to={`/cart/${item._id}`}>Add to Cart</Link>
                                     <input type="number" value={quantity} onChange={e => setQuantity(e.target.value)}/>
                                     <Link to={`/productsdetail/${item._id}`}>View Details</Link>
+                                    
                                 </div>
                             </div>
                         </div>
