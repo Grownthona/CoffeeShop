@@ -43,9 +43,9 @@ import axios from 'axios';
 
     const formData = new FormData();
     formData.append('name', newdata);
-    formData.append('name', newdata);
-    formData.append('name', newdata);
-    formData.append('name', newdata);
+    formData.append('price', newdata);
+    formData.append('details', newdata);
+    formData.append('catagory', newdata);
     formData.append('testImage',file);
 
     try {
