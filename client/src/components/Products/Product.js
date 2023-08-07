@@ -1,7 +1,12 @@
 import React, { useState ,useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 import './Product.css';
 //import img1 from './images/icon-01.png'
+import logo from './images/dough-boi-bakery-logo-dark.png'
+import img1 from './images/facebook.png'
+import img2 from './images/instagram.png'
+import img4 from './images/pinterest.png'
 
 export default function Product(){
     const [product, setFormData] = useState(null);
@@ -29,9 +34,38 @@ export default function Product(){
         };
         return (
         <div>
+             <div className="navbar">
+                <div className="navbar-logo" href="#"><Link to="/"><img src={logo} alt="logo"/></Link></div>
+                <ul className="navbar-menu">
+                    <li><Link to="/Products">Menu</Link></li>
+                    <li><Link to="/Products">Contract</Link></li>
+                    <li><Link to="/Products">About Us</Link></li>
+                </ul>
+                <ul className="navbar-social">
+                    <div className="social-link"><a href="https://www.facebook.com/"><img src={img1} alt="facebook"/></a></div>
+                    <div className="social-link"><a href="https://www.instagram.com/"><img src={img2} alt="Instagram"/></a></div>
+                    <div className="social-link"><a href="https://www.pinterest.com/"><img src={img4} alt="Social Icon 3"/></a></div>
+                </ul>
+            </div> 
             <div className="container">
-                <div className="filter-box">
-                    
+                <div className="catagories">
+                <h3>Catagories</h3>
+                    <div className="box">
+                        <div className="form-check">
+                            <Form>
+                                {['checkbox'].map((type) => (
+                                    <div key={`default-${type}`} className="mb-3">
+                                        <Form.Check type={type} id={`default-${type}`} label={`Cake`} />
+                                        <Form.Check type={type} id={`default-${type}`} label={`Pastry`}/>
+                                        <Form.Check type={type} id={`default-${type}`} label={`Muffin`}/>
+                                        <Form.Check type={type} id={`default-${type}`} label={`Brownie`}/>
+                                        <Form.Check type={type} id={`default-${type}`} label={`Cookie`}/>
+                                        <Form.Check type={type} id={`default-${type}`} label={`Donut`}/>
+                                    </div>
+                                ))}
+                            </Form>
+                        </div>
+                    </div>
                 </div>
                 <div className="product-box">
                 {product && product.map((item, index) => {
@@ -40,32 +74,11 @@ export default function Product(){
                     return(
                     <div className="card" key={index}>
                         
-                    <img src={`data:${item.imageSrc.contentType};base64,${base64Data}`} alt="lala" />
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="card-title">
-                                    <h4>{item.name}</h4>
-                                    <p>{item._id}</p>
-                                    <h4>{item.price}</h4>
-                                </div>
-                            </div>
-                            <div className='details'>
-                                <p className='text'>{item.details}</p>
-                            </div>
-                            <div className="btn-group">
-                                <div className="btn">
-                                    <Link onClick={() => handleAddToCart(item)} to={`/cart/${item._id}`}>Add to Cart</Link>
-                                    <input type="number" value={quantity} onChange={e => setQuantity(e.target.value)}/>
-                                    <Link to={`/productsdetail/${item._id}`}>View Details</Link>
-                                    
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     )
-                    })}
+                })}
                 </div>
-            </div>
-        </div>
+                </div>
+           </div>
     )
 }

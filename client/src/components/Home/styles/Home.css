@@ -135,6 +135,11 @@ body {
   font-size: 25px;
 }
 
+.bg-txt .header h1{
+  font-family: 'LillyBelle';
+  font-size: 35px;
+}
+
 .elementor-divider{
   margin: 15px;
 }
