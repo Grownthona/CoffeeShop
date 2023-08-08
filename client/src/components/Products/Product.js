@@ -2,7 +2,6 @@ import React, { useState ,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import './Product.css';
-//import img1 from './images/icon-01.png'
 import logo from './images/dough-boi-bakery-logo-dark.png'
 import img1 from './images/facebook.png'
 import img2 from './images/instagram.png'
@@ -12,9 +11,14 @@ import { BsCart2 } from "react-icons/bs";
 
 export default function Product(){
     const [product, setFormData] = useState(null);
-    const [quantity, setQuantity] = useState(1);
+    const [filterMood,setfilterMood] = useState(false);
+    const [filterName,setfilterName] = useState("");
+    const [count,setCount] = useState(0);
+    const [cartItems, setCartItems] = useState([]);
+    const [addedStatus, setAddedStatus] = useState({});
 
     useEffect(() => {
+         //console.log(cart);
         fetch('/Products',{
           method:"GET",
         }) // replace with your server-side route
@@ -22,19 +26,50 @@ export default function Product(){
           .then(data => setFormData(data))
           .catch(error => console.log(error));
       }, []);
+
+      useEffect(() => {
+        // Load cart items from localStorage when the component mounts
+        const savedCartItems = localStorage.getItem('cartItems');
+        if (savedCartItems) {
+          setCartItems(JSON.parse(savedCartItems));
+        }
+      }, []);
+
+      useEffect(() => {
+        // Save cart items to localStorage whenever the cartItems state changes
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      }, [cartItems]);
   
 
       const handleAddToCart = (value) => {
-        // Handle the value
-        const productId = value._id;
-        console.log(value._id);
-        fetch('http://localhost:5000/products/addcart', {
+
+        const itemExists = cartItems.some(cartItem => cartItem._id === value._id);
+        if (!itemExists) {
+        setCount(count+1);
+        setCartItems([...cartItems, value]);
+        }
+
+        setAddedStatus(prevStatus => ({
+            ...prevStatus,
+            [value._id]: true
+          }));
+        
+       
+        /*fetch('http://localhost:5000/products/addcart', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({ productId, quantity })
           });
+          */
+        };
+
+        const handleFilter = (value) => {
+            //console.log(value);
+            setfilterMood(true);
+            setfilterName(value);
+
         };
         return (
         <div>
@@ -49,6 +84,7 @@ export default function Product(){
                     <div className="social-link"><a href="https://www.facebook.com/"><img src={img1} alt="facebook"/></a></div>
                     <div className="social-link"><a href="https://www.instagram.com/"><img src={img2} alt="Instagram"/></a></div>
                     <div className="social-link"><a href="https://www.pinterest.com/"><img src={img4} alt="Social Icon 3"/></a></div>
+                    <div className='social-link'><Link to={`/cart`} style={{textDecoration: 'none',color:'black',paddingLeft:'0px'}}><BsCart2/>{count}</Link></div>
                 </ul>
             </div> 
             <div className="container">
@@ -58,21 +94,55 @@ export default function Product(){
                         <div className="form-check">
                             <Form>
                                 {['checkbox'].map((type) => (
-                                    <div key={`default-${type}`} className="mb-3">
+                                    <div key={`reverse-${type}`} className="mb-3">
                                         
-                                        <Form.Check type={type} id={`default-${type}`} label={`Cake`} />
-                                        <Form.Check type={type} id={`default-${type}`} label={`Pastry`}/>
-                                        <Form.Check type={type} id={`default-${type}`} label={`Muffin`}/>
-                                        <Form.Check type={type} id={`default-${type}`} label={`Brownie`}/>
-                                        <Form.Check type={type} id={`default-${type}`} label={`Cookie`}/>
-                                        <Form.Check type={type} id={`default-${type}`} label={`Donut`}/>
+                                        <Form.Check type={type}  name="group1" id={`reverse-${type}-1`} label={`Cake`} onClick={() => handleFilter('Cake')} />
+                                        <Form.Check type={type}  name="group2" id={`reverse-${type}-2`} label={`Pastry`} onClick={() => handleFilter('Pastry')}/>
+                                        <Form.Check type={type} id={`reverse-${type}-3`} label={`Muffin`} onClick={() => handleFilter('Muffin')}/>
+                                        <Form.Check type={type} id={`reverse-${type}-4`} label={`Brownie`} onClick={() => handleFilter('Brownies')}/>
+                                        <Form.Check type={type} id={`reverse-${type}-5`} label={`Cookie`} onClick={() => handleFilter('Cookie')}/>
+                                        <Form.Check type={type} id={`reverse-${type}-6`} label={`Donut`} onClick={() => handleFilter('Donut')}/>
                                     </div>
                                 ))}
                             </Form>
                         </div>
                     </div>
                 </div>
-                
+                {filterMood ?
+                <div className="product-box">
+                   
+                   {product && product.map((item, index) =>{
+
+                    if(item.category===filterName)
+                    {
+                        const base64Data = btoa(String.fromCharCode(...new Uint8Array(item.imageSrc.data.data)));
+                        return(
+                            <div className="card" key={index}>
+                            <div className='image-box'>
+                                <img src={`data:${item.imageSrc.contentType};base64,${base64Data}`} alt="lala" />
+                            </div>
+                                <div className="card-body">
+                                    <div className="row">
+                                        <div className="card-title">
+                                            <Link to={`/productsdetail/${item._id}`} style={{textDecoration: 'none',color:'black'}}>{item.name}</Link> 
+                                            <p>{item.price} Tk</p>
+                                        </div>
+                                    </div>
+                                    <div className='details'>
+                                        <p className='text'>{item.details}</p>
+                                    </div>
+                                    <div className="btn-group">
+                                        <div className="btn">
+                                            <Link onClick={() => handleAddToCart(item)} style={{textDecoration: 'none',color:'white',paddingLeft:'15px'}}>Add to Cart</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            )
+                        }
+                   })}
+                </div>
+                :
                 <div className="product-box">
                 {product && product.map((item, index) => {
                     const base64Data = btoa(String.fromCharCode(...new Uint8Array(item.imageSrc.data.data))
@@ -94,18 +164,23 @@ export default function Product(){
                             </div>
                             <div className="btn-group">
                                 <div className="btn">
-                                    <BsCart2/>
-                                    <Link onClick={() => handleAddToCart(item)} to={`/cart/${item._id}`} style={{textDecoration: 'none',color:'white',paddingLeft:'15px'}}>Add to Cart</Link>
+                                    <Link onClick={() => handleAddToCart(item)} disabled={addedStatus[item._id]} style={{textDecoration: 'none',color:'white',paddingLeft:'15px'}}>
+                                        {addedStatus[item._id] ? 'Cart Added' : 'Add to Cart'}
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                     </div>
                     )
                     })}
-
                 </div>
-            
+                }
             </div>
+            <ul>
+        {cartItems.map((item, index) => (
+          <li key={index}>{item.name}</li>
+        ))}
+      </ul>
            </div>
     )
 }
