@@ -5,7 +5,9 @@ import SignUp from './components/Login/SignUp';
 import SignIn from './components/Login/SignIn';
 import Product from './components/Products/Product';
 //import ImageUploadForm from './ImageUploadForm';
+import ImageUploadForm from './UploadImagesForm';
 import ProductDetails from './components/Products/ProductDetails';
+
 //import ImageResize from './ImageResize';
 //import UploadForm from './UploadForm';
 //import Test from './components/Test';
@@ -42,6 +44,7 @@ function App() {
     <Router>
        <Routes>
         <Route exact path='/' element={<Home/>}></Route>
+        <Route path='/test' element={<ImageUploadForm/>}></Route>
         <Route path='/SignUp' element={<SignUp/>}></Route>
         <Route path='/SignIn' element={<SignIn/>}></Route>
         <Route path='/Products' element={<Product/>}></Route>

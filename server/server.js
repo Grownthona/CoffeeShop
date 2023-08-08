@@ -23,7 +23,7 @@ app.use('/products/',productRouter);
 app.use('/multi',multiimg)
 mongoose
   .connect(
-    'mongodb+srv://mongr:yw46DNwYWt4@cluster0.htcqlu9.mongodb.net/image?retryWrites=true&w=majority'
+    'mongodb+srv://mongr:yw46DNwYWt4@cluster0.htcqlu9.mongodb.net/bakery?retryWrites=true&w=majority'
   )
   .then(result => {
     console.log("MongoDB database connection established successfully");

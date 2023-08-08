@@ -7,6 +7,8 @@ import logo from './images/dough-boi-bakery-logo-dark.png'
 import img1 from './images/facebook.png'
 import img2 from './images/instagram.png'
 import img4 from './images/pinterest.png'
+import { BsCart2 } from "react-icons/bs";
+
 
 export default function Product(){
     const [product, setFormData] = useState(null);
@@ -20,6 +22,8 @@ export default function Product(){
           .then(data => setFormData(data))
           .catch(error => console.log(error));
       }, []);
+  
+
       const handleAddToCart = (value) => {
         // Handle the value
         const productId = value._id;
@@ -55,6 +59,7 @@ export default function Product(){
                             <Form>
                                 {['checkbox'].map((type) => (
                                     <div key={`default-${type}`} className="mb-3">
+                                        
                                         <Form.Check type={type} id={`default-${type}`} label={`Cake`} />
                                         <Form.Check type={type} id={`default-${type}`} label={`Pastry`}/>
                                         <Form.Check type={type} id={`default-${type}`} label={`Muffin`}/>
@@ -67,18 +72,40 @@ export default function Product(){
                         </div>
                     </div>
                 </div>
+                
                 <div className="product-box">
                 {product && product.map((item, index) => {
                     const base64Data = btoa(String.fromCharCode(...new Uint8Array(item.imageSrc.data.data))
                     );
                     return(
                     <div className="card" key={index}>
-                        
+                    <div className='image-box'>
+                        <img src={`data:${item.imageSrc.contentType};base64,${base64Data}`} alt="lala" />
+                    </div>
+                        <div className="card-body">
+                            <div className="row">
+                                <div className="card-title">
+                                    <Link to={`/productsdetail/${item._id}`} style={{textDecoration: 'none',color:'black'}}>{item.name}</Link> 
+                                    <p>{item.price} Tk</p>
+                                </div>
+                            </div>
+                            <div className='details'>
+                                <p className='text'>{item.details}</p>
+                            </div>
+                            <div className="btn-group">
+                                <div className="btn">
+                                    <BsCart2/>
+                                    <Link onClick={() => handleAddToCart(item)} to={`/cart/${item._id}`} style={{textDecoration: 'none',color:'white',paddingLeft:'15px'}}>Add to Cart</Link>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     )
-                })}
+                    })}
+
                 </div>
-                </div>
+            
+            </div>
            </div>
     )
 }

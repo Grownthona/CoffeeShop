@@ -42,7 +42,7 @@ const upload = multer({ storage: storage,
 
 
 router.route('/').get(async(req, res) => {
-    await Product.find({'products.category': 'coffee'})
+    await Product.find({})
       .then(data => res.json(data))
       .catch(err => res.status(400).json('Error: ' + err));
   });
@@ -77,6 +77,7 @@ router.route('/').get(async(req, res) => {
 
   router.route('/addproduct').post(upload.single('testImage'),async(req, res) => {
     //const {name,price,imageSrc,details,category} = req.body;
+    //console.log(req.body);
     const newProduct = new Product({
         name: req.body.name,
         price: req.body.price,
@@ -94,6 +95,7 @@ router.route('/').get(async(req, res) => {
           console.log('Product saved to database');
         }
       });
+    
   });
 
 module.exports = router;

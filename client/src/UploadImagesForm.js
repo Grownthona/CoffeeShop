@@ -3,16 +3,29 @@ import axios from 'axios';
 
 
   export default function ImageUploadForm() {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState([]);
   const [imageData, setImageData] = useState([]);
   const[newdata,setData] = useState("")
+  const[price,setPrice] = useState("")
+  const[details,setDetails] = useState("")
+  const[catagory,setCatagory] = useState("")
+
 
   const handleChange = (e) => {
     setData(e.target.value);
   };
+  const handlePrice = (e) => {
+    setPrice(e.target.value);
+  };
+  const handleDetails = (e) => {
+    setDetails(e.target.value);
+  };
+  const handleCatagory = (e) => {
+    setCatagory(e.target.value);
+  };
   const handleFileChange = (e) => {
     setFile(e.target.files);
-    console.log(e.target.files);
+    //console.log(e.target.files);
   };
   
     useEffect(() => {
@@ -40,13 +53,16 @@ import axios from 'axios';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append('name', newdata);
-    formData.append('price', newdata);
-    formData.append('details', newdata);
-    formData.append('catagory', newdata);
+    formData.append('price', price);
+    formData.append('details', details);
+    formData.append('catagory', catagory);
     formData.append('testImage',file);
+    console.log(file);
+    //console.log(formData);
+
+    
 
     try {
       const response = await axios.post('http://localhost:5000/products/addproduct', formData)
@@ -54,6 +70,8 @@ import axios from 'axios';
     } catch (error) {
       console.error(error);
     }
+    
+
   };
   
 
@@ -67,22 +85,13 @@ import axios from 'axios';
     <form onSubmit={handleSubmit}>
       <input type="file" onChange={handleFileChange} name='testImage'/>
       <input type="text" onChange={handleChange} name='name'/>
-      <input type="text" onChange={handleChange} name='price'/>
-      <input type="text" onChange={handleChange} name='details'/>
-      <input type="text" onChange={handleChange} name='catagory'/>
+      <input type="text" onChange={handlePrice} name='price'/>
+      <input type="text" onChange={handleDetails} name='details'/>
+      <input type="text" onChange={handleCatagory} name='catagory'/>
       <button type="submit">Upload</button>
     </form>
 
-    <div>
-    {imageData && (imageData.map((singleData,index) => {
-        
-        const base64Data = btoa(String.fromCharCode(...new Uint8Array(singleData.images.data.data))
-        );
-         
-       return <img key={index} src={`data:${singleData.images.contentType};base64,${base64Data}`} alt='lala'/>
-       }
-   ))}
-    </div>
+   
    </div>
   );
 }
