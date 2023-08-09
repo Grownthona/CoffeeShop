@@ -36,7 +36,6 @@ export default function Product(){
       useEffect(() => {
         // Load cart items from localStorage when the component mounts
         if (savedCartItems) {
-            console.log(savedCartItems);
           setCartItems(JSON.parse(savedCartItems));
         }
       }, []);
@@ -53,6 +52,11 @@ export default function Product(){
             setQuantityMap(prevMap => ({
                 ...prevMap,
                 [item._id]: item.quantity
+              }));
+
+              setAddedStatus(prevStatus => ({
+                ...prevStatus,
+                [item._id]: true
               }));
         });
       }, [cartItems]); // Run the effect whenever cartItems changes
@@ -96,12 +100,12 @@ export default function Product(){
         }
         
         setCartItems([...cartItems, value]);
-        }
-
         setAddedStatus(prevStatus => ({
             ...prevStatus,
             [value._id]: true
           }));
+        }
+
         };
 
         const handleFilter = (value) => {
