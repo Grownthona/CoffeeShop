@@ -1,12 +1,12 @@
 import React, { useState ,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
-import './Product.css';
 import logo from './images/dough-boi-bakery-logo-dark.png'
 import img1 from './images/facebook.png'
 import img2 from './images/instagram.png'
 import img4 from './images/pinterest.png'
 import { BsCart2 } from "react-icons/bs";
+import './Product.css';
 
 
 export default function Product(){
@@ -16,7 +16,13 @@ export default function Product(){
     const [count,setCount] = useState(0);
     const [cartItems, setCartItems] = useState([]);
     const [addedStatus, setAddedStatus] = useState({});
+    const [quantityMap, setQuantityMap] = useState({});
 
+    const savedCartItems = localStorage.getItem('cartItems');
+
+    //localStorage.clear();
+
+    
     useEffect(() => {
          //console.log(cart);
         fetch('/Products',{
@@ -29,23 +35,66 @@ export default function Product(){
 
       useEffect(() => {
         // Load cart items from localStorage when the component mounts
-        const savedCartItems = localStorage.getItem('cartItems');
         if (savedCartItems) {
+            console.log(savedCartItems);
           setCartItems(JSON.parse(savedCartItems));
         }
       }, []);
+
 
       useEffect(() => {
         // Save cart items to localStorage whenever the cartItems state changes
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
       }, [cartItems]);
-  
 
+      useEffect(() => {
+        // Loop through cartItems and perform operations
+        cartItems.forEach(item => {
+            setQuantityMap(prevMap => ({
+                ...prevMap,
+                [item._id]: item.quantity
+              }));
+        });
+      }, [cartItems]); // Run the effect whenever cartItems changes
+    
+    
+
+      const handleIncrement = (productId) => {
+        setQuantityMap(prevMap => ({
+          ...prevMap,
+          [productId]: (prevMap[productId] || 1) + 1
+        }));
+      };
+
+      const handleDecrement = (productId) => {
+        setQuantityMap(prevMap => ({
+          ...prevMap,
+          [productId]: Math.max((prevMap[productId] || 1) - 1, 1)
+        }));
+      };
+
+      /*const renderCartItems = () => {
+        return cartItems.map((item, index) => (
+          <li key={index}>
+            Product: {item.name}, Quantity: {item.quantity}, Price: {item.price}
+          </li>
+        ));
+      };
+      */
       const handleAddToCart = (value) => {
 
         const itemExists = cartItems.some(cartItem => cartItem._id === value._id);
+
         if (!itemExists) {
         setCount(count+1);
+        const productId = value._id;
+
+        if(!quantityMap[productId]){
+            value['quantity'] = 1;
+        }else{
+            value['quantity'] = quantityMap[productId];
+        }
+        
         setCartItems([...cartItems, value]);
         }
 
@@ -53,24 +102,14 @@ export default function Product(){
             ...prevStatus,
             [value._id]: true
           }));
-        
-       
-        /*fetch('http://localhost:5000/products/addcart', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ productId, quantity })
-          });
-          */
         };
 
         const handleFilter = (value) => {
-            //console.log(value);
             setfilterMood(true);
             setfilterName(value);
-
         };
+
+        
         return (
         <div>
              <div className="navbar">
@@ -84,7 +123,7 @@ export default function Product(){
                     <div className="social-link"><a href="https://www.facebook.com/"><img src={img1} alt="facebook"/></a></div>
                     <div className="social-link"><a href="https://www.instagram.com/"><img src={img2} alt="Instagram"/></a></div>
                     <div className="social-link"><a href="https://www.pinterest.com/"><img src={img4} alt="Social Icon 3"/></a></div>
-                    <div className='social-link'><Link to={`/cart`} style={{textDecoration: 'none',color:'black',paddingLeft:'0px'}}><BsCart2/>{count}</Link></div>
+                    <div className='social-link'><Link to="/cart"style={{textDecoration: 'none',color:'black',paddingLeft:'0px'}}><BsCart2/>{cartItems.length}</Link></div>
                 </ul>
             </div> 
             <div className="container">
@@ -152,6 +191,11 @@ export default function Product(){
                     <div className='image-box'>
                         <img src={`data:${item.imageSrc.contentType};base64,${base64Data}`} alt="lala" />
                     </div>
+                    <div className="quantity-controls">
+                            <button onClick={() => handleDecrement(item._id)} className="quantity-btn minus">-</button>
+                                <span className="quantity">{quantityMap[item._id] || 1}</span>
+                            <button onClick={() => handleIncrement(item._id)} className="quantity-btn plus">+</button>
+                        </div>
                         <div className="card-body">
                             <div className="row">
                                 <div className="card-title">
@@ -176,11 +220,6 @@ export default function Product(){
                 </div>
                 }
             </div>
-            <ul>
-        {cartItems.map((item, index) => (
-          <li key={index}>{item.name}</li>
-        ))}
-      </ul>
-           </div>
+        </div>
     )
 }

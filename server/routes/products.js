@@ -9,7 +9,7 @@ const CartItem = require('../models/cartItem');
 
 router.get('/cart', async (req, res) => {
   try {
-    const cartItems = await CartItem.find().populate('productId');;
+    const cartItems = await CartItem.find().populate('productId');
     res.send(cartItems);
   } catch (err) {
     console.error(err);
