@@ -12,7 +12,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default function Checkout() {
 
     const [cartItems, setCartItems] = useState([]);
-
+    const [productItems, setProductItems] = useState([]);
+    const [cartPrice, setTotalPrice] = useState(0);
+    
+    
     const savedCartItems = localStorage.getItem('cartItems');
 
     useEffect(() => {
@@ -28,6 +31,44 @@ export default function Checkout() {
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
     
       }, [cartItems]);
+
+      useEffect(() => {
+        const transferredItems = cartItems.map((cartItem) => ({
+          name: cartItem.name,
+          quantity: cartItem.quantity,
+          price: cartItem.cartPrice,
+          category: cartItem.category
+        }));
+      
+        setProductItems((prevProductItems) => [...prevProductItems, ...transferredItems]);
+        //setProductItems([]);
+      }, [cartItems]);
+
+      const handleSubmit = async(e) => {
+        e.preventDefault();
+        
+        
+        //setProductItems([]);
+        const totalPurchasePrice = cartItems.reduce((total, item) => total + (item.cartPrice || 0), 0);
+        console.log(productItems);
+        try {
+          const response = await fetch('http://localhost:5000/checkout/addcheckout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              productItems,
+              totalPurchasePrice,
+            }),
+          });
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+       
+      };
 
       const calculateTotalPrice = () => {
         return cartItems.reduce((total, item) => total + (item.cartPrice || 0), 0);
@@ -102,18 +143,18 @@ export default function Checkout() {
 
          <div className="col-md-8 order-md-1">
            <h4 className="mb-3">Billing address</h4>
-           <form className="needs-validation" novalidate>
+           <form className="needs-validation" novalidate onSubmit={handleSubmit}>
              <div className="row">
                <div className="col-md-6 mb-3">
                  <label for="firstName">First name</label>
-                 <input type="text" class="form-control" id="firstName" placeholder="" value="" required />
+                 <input type="text" class="form-control" id="firstName" placeholder="" value="" />
                  <div className="invalid-feedback">
                    Valid first name is required.
                  </div>
                </div>
                <div className="col-md-6 mb-3">
                  <label for="lastName">Last name</label>
-                 <input type="text" className="form-control" id="lastName" placeholder="" value="" required />
+                 <input type="text" className="form-control" id="lastName" placeholder="" value=""/>
                  <div className="invalid-feedback">
                    Valid last name is required.
                  </div>
@@ -241,7 +282,7 @@ export default function Checkout() {
                </div>
              </div>
              <hr className="mb-4" />
-             <button className="btn btn-primary btn-lg btn-block" type="button">Continue to checkout</button>
+             <button className="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
            </form>
          </div>
        </div>
