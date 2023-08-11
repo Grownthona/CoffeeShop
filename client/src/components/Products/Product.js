@@ -13,7 +13,6 @@ export default function Product(){
     const [product, setFormData] = useState(null);
     const [filterMood,setfilterMood] = useState(false);
     const [filterName,setfilterName] = useState("");
-    const [count,setCount] = useState(0);
     const [cartItems, setCartItems] = useState([]);
     const [addedStatus, setAddedStatus] = useState({});
     const [quantityMap, setQuantityMap] = useState({});
@@ -85,12 +84,12 @@ export default function Product(){
         ));
       };
       */
-      const handleAddToCart = (value) => {
+      const handleAddToCart = (value,price) => {
 
         const itemExists = cartItems.some(cartItem => cartItem._id === value._id);
 
         if (!itemExists) {
-        setCount(count+1);
+        //setCount(count+1);
         const productId = value._id;
 
         if(!quantityMap[productId]){
@@ -98,6 +97,8 @@ export default function Product(){
         }else{
             value['quantity'] = quantityMap[productId];
         }
+        //console.log(quantityMap[productId]);
+        value['cartPrice'] = price*value['quantity'];
         
         setCartItems([...cartItems, value]);
         setAddedStatus(prevStatus => ({
@@ -105,7 +106,6 @@ export default function Product(){
             [value._id]: true
           }));
         }
-
         };
 
         const handleFilter = (value) => {
@@ -160,7 +160,7 @@ export default function Product(){
                     {
                         const base64Data = btoa(String.fromCharCode(...new Uint8Array(item.imageSrc.data.data)));
                         return(
-                            <div className="card" key={index}>
+                            <div className="cardd" key={index}>
                             <div className='image-box'>
                                 <img src={`data:${item.imageSrc.contentType};base64,${base64Data}`} alt="lala" />
                             </div>
@@ -191,20 +191,24 @@ export default function Product(){
                     const base64Data = btoa(String.fromCharCode(...new Uint8Array(item.imageSrc.data.data))
                     );
                     return(
-                    <div className="card" key={index}>
+                    <div className="cardd" key={index}>
                     <div className='image-box'>
                         <img src={`data:${item.imageSrc.contentType};base64,${base64Data}`} alt="lala" />
                     </div>
-                    <div className="quantity-controls">
+                    <div className="quantityy-controls">
                             <button onClick={() => handleDecrement(item._id)} className="quantity-btn minus">-</button>
-                                <span className="quantity">{quantityMap[item._id] || 1}</span>
+                                <span className="quantityy">{quantityMap[item._id] || 1}</span>
                             <button onClick={() => handleIncrement(item._id)} className="quantity-btn plus">+</button>
                         </div>
                         <div className="card-body">
                             <div className="row">
                                 <div className="card-title">
                                     <Link to={`/productsdetail/${item._id}`} style={{textDecoration: 'none',color:'black'}}>{item.name}</Link> 
+                                    {quantityMap[item._id] ?
+                                    <p>{quantityMap[item._id] *item.price} Tk</p>
+                                    :
                                     <p>{item.price} Tk</p>
+                                    }
                                 </div>
                             </div>
                             <div className='details'>
@@ -212,7 +216,7 @@ export default function Product(){
                             </div>
                             <div className="btn-group">
                                 <div className="btn">
-                                    <Link onClick={() => handleAddToCart(item)} disabled={addedStatus[item._id]} style={{textDecoration: 'none',color:'white',paddingLeft:'15px'}}>
+                                    <Link onClick={() => handleAddToCart(item,item.price)} disabled={addedStatus[item._id]} style={{textDecoration: 'none',color:'white',paddingLeft:'15px'}}>
                                         {addedStatus[item._id] ? 'Cart Added' : 'Add to Cart'}
                                     </Link>
                                 </div>

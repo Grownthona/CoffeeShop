@@ -149,7 +149,7 @@ body {
     align-items: center;
     margin-top: -6rem;
 }
-.card {
+.cardd {
   
     width: 250px;
     height: 300px;
@@ -260,7 +260,7 @@ body {
     cursor: pointer;
   }
   
-  .quantity {
+  .quantityy {
     font-size: 16px;
     font-weight: bold;
   }
