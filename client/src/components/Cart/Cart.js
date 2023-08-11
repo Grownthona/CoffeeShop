@@ -8,12 +8,8 @@ export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [addedStatus, setAddedStatus] = useState({});
   const [quantityMap, setQuantityMap] = useState({});
-  const [total, setTotalPrice] = useState(0);
-
-
 
   const savedCartItems = localStorage.getItem('cartItems');
-
 
   useEffect(() => {
     // Load cart items from localStorage when the component mounts
@@ -64,6 +60,10 @@ export default function Cart() {
           item._id === productId ? { ...item, cartPrice: pp } : item
         )
       );
+  };
+
+  const calculateTotalPrice = () => {
+    return cartItems.reduce((total, item) => total + (item.cartPrice || 0), 0);
   };
 
   const handleDecrement = (productId,productPrice,Product) => {
@@ -170,7 +170,7 @@ export default function Cart() {
                   <p>Temporary amount</p>
                 </div>
                 <div>
-                  <p>{total}</p>
+                  <p>{calculateTotalPrice()}</p>
                 </div>
               </div>
               <div className='checkout-btn'><button className="button-15" role="button">Go to Checkout</button></div>
