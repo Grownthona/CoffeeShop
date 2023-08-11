@@ -39,8 +39,6 @@ export default function Checkout() {
 
             <div>
                 {cartItems.map((item, index) => (
-               
-                    
                 <><div className='CartShow' key={index}>
                     <li className="list-group-item d-flex justify-content-between lh-condensed">
                             <div>

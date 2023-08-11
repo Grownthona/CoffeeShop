@@ -44,10 +44,12 @@ export default function SignIn(){
                     <div className="social-link"><a href="https://www.facebook.com/"><img src={img1} alt="facebook"/></a></div>
                     <div className="social-link"><a href="https://www.instagram.com/"><img src={img2} alt="Instagram"/></a></div>
                     <div className="social-link"><a href="https://www.pinterest.com/"><img src={img4} alt="Social Icon 3"/></a></div>
+                    <div className="social-link"><Link to="/SignUp">
+                    <button class="button-7" role="button">Sign Up</button></Link></div>
                 </ul>
             </div> 
       <div className='authentication-form'>
-        <div className='form-control'>
+        <div className='form-controll'>
             <div className='form-group'> 
                <h1>Sign In</h1>
                 <form onSubmit={handleSubmit}>
