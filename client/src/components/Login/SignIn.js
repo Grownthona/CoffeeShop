@@ -1,4 +1,11 @@
 import React,{ useState } from "react";
+
+import { Link } from 'react-router-dom';
+import { BsCart2 } from "react-icons/bs";
+import img1 from '../Products/images/facebook.png'
+import img2 from '../Products/images/instagram.png'
+import img4 from '../Products/images/pinterest.png'
+import logo from '../Products/images/dough-boi-bakery-logo-dark.png'
 import './Loginstyles/Login.css';
 
 export default function SignIn(){
@@ -26,6 +33,19 @@ export default function SignIn(){
       };
     return(
     <div>
+      <div className="navbar">
+                <div className="navbar-logo" href="#"><Link to="/"><img src={logo} alt="logo"/></Link></div>
+                <ul className="navbar-menu">
+                    <li><Link to="/Products">Menu</Link></li>
+                    <li><Link to="/Products">Contract</Link></li>
+                    <li><Link to="/Products">About Us</Link></li>
+                </ul>
+                <ul className="navbar-social">
+                    <div className="social-link"><a href="https://www.facebook.com/"><img src={img1} alt="facebook"/></a></div>
+                    <div className="social-link"><a href="https://www.instagram.com/"><img src={img2} alt="Instagram"/></a></div>
+                    <div className="social-link"><a href="https://www.pinterest.com/"><img src={img4} alt="Social Icon 3"/></a></div>
+                </ul>
+            </div> 
       <div className='authentication-form'>
         <div className='form-control'>
             <div className='form-group'> 

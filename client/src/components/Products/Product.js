@@ -165,7 +165,7 @@ export default function Product(){
                                 <img src={`data:${item.imageSrc.contentType};base64,${base64Data}`} alt="lala" />
                             </div>
                                 <div className="card-body">
-                                    <div className="roww">
+                                    <div className="row">
                                         <div className="card-title">
                                             <Link to={`/productsdetail/${item._id}`} style={{textDecoration: 'none',color:'black'}}>{item.name}</Link> 
                                             <p>{item.price} Tk</p>
