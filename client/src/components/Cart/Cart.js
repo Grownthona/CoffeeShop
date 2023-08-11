@@ -2,6 +2,12 @@ import React, { useEffect,useState} from 'react';
 
 //import { useParams } from 'react-router-dom';
 import './Cart.css';
+import { Link } from 'react-router-dom';
+import { BsCart2 } from "react-icons/bs";
+import img1 from '../Products/images/facebook.png'
+import img2 from '../Products/images/instagram.png'
+import img4 from '../Products/images/pinterest.png'
+import logo from '../Products/images/dough-boi-bakery-logo-dark.png'
 
 export default function Cart() {
 
@@ -111,6 +117,21 @@ export default function Cart() {
       */
   return (
     <div className='none'>
+
+        <div className="navbar">
+                <div className="navbar-logo" href="#"><Link to="/"><img src={logo} alt="logo"/></Link></div>
+                <ul className="navbar-menu">
+                    <li><Link to="/Products">Menu</Link></li>
+                    <li><Link to="/Products">Contract</Link></li>
+                    <li><Link to="/Products">About Us</Link></li>
+                </ul>
+                <ul className="navbar-social">
+                    <div className="social-link"><a href="https://www.facebook.com/"><img src={img1} alt="facebook"/></a></div>
+                    <div className="social-link"><a href="https://www.instagram.com/"><img src={img2} alt="Instagram"/></a></div>
+                    <div className="social-link"><a href="https://www.pinterest.com/"><img src={img4} alt="Social Icon 3"/></a></div>
+                    <div className='social-link'><Link to="/cart"style={{textDecoration: 'none',color:'black',paddingLeft:'0px'}}><BsCart2/>{cartItems.length}</Link></div>
+                </ul>
+            </div> 
      
       <section className="h-100 h-custom">
         <div className='Cart'>
@@ -170,7 +191,7 @@ export default function Cart() {
                   <p>Temporary amount</p>
                 </div>
                 <div>
-                  <p>{calculateTotalPrice()}</p>
+                  <p>{calculateTotalPrice()} Tk</p>
                 </div>
               </div>
               <div className='checkout-btn'><button className="button-15" role="button">Go to Checkout</button></div>

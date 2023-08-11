@@ -130,7 +130,7 @@ export default function Product(){
                     <div className='social-link'><Link to="/cart"style={{textDecoration: 'none',color:'black',paddingLeft:'0px'}}><BsCart2/>{cartItems.length}</Link></div>
                 </ul>
             </div> 
-            <div className="container">
+            <div className="containerr">
                 <div className="catagories">
                 <h3>Catagories</h3>
                     <div className="box">
@@ -165,7 +165,7 @@ export default function Product(){
                                 <img src={`data:${item.imageSrc.contentType};base64,${base64Data}`} alt="lala" />
                             </div>
                                 <div className="card-body">
-                                    <div className="row">
+                                    <div className="roww">
                                         <div className="card-title">
                                             <Link to={`/productsdetail/${item._id}`} style={{textDecoration: 'none',color:'black'}}>{item.name}</Link> 
                                             <p>{item.price} Tk</p>

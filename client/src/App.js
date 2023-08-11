@@ -12,6 +12,7 @@ import ProductDetails from './components/Products/ProductDetails';
 //import UploadForm from './UploadForm';
 //import Test from './components/Test';
 import Cart from './components/Cart/Cart';
+import Checkout from './components/Checkout/Checkout';
 /*
 import React,{useEffect,useState} from 'react'
 
@@ -50,6 +51,7 @@ function App() {
         <Route path='/Products' element={<Product/>}></Route>
         <Route path='/productsdetail/:id' element={<ProductDetails/>}></Route>
         <Route path='/cart' element={<Cart/>}></Route>
+        <Route path='/checkout' element={<Checkout/>}></Route>
       </Routes>
     </Router>
     
