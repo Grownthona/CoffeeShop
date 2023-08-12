@@ -1,15 +1,17 @@
 const router = require('express').Router();
-
+const checkLogin = require('../middlewares/checkLogin');
 let Checkout = require('../models/checkout_model');
+
 router.route('/addcheckout').post(async (req, res) => {
+
     const {totalPurchasePrice,productItems} = req.body;
 
-   
-    try {
+
+     try {
       const newCheckout = new Checkout({
         totalPurchasePrice,
         purchaseDate: new Date(),
-        userId: '123456', // Replace with actual user ID
+        userId: '123456', 
         productItems: productItems.map((item) => ({
             name: item.name,
             quantity: item.quantity,

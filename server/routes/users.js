@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 
 let User = require('../models/usermodel');
 
@@ -11,14 +13,26 @@ router.route('/').get((req, res) => {
 router.route('/login').post(async(req,res) => {
 
    const {email ,password} = req.body;
-
    try{
       const user = await User.findOne({email});
+  
       if(user){
-        if(password === user.password){
-          return res.status(201).json('Login Successful' );
+        const isValidPassword = await bcrypt.compare(password,user.password);
+        if(isValidPassword){
+          const token = jwt.sign({ 
+            username: user.username,
+            userId: user._id, 
+        }, process.env.JWT_SECRET,{
+          expiresIn:'1h'
+        });
+        return res.status(201).json({
+          "access_token":token,
+          "message": "Login Suucesful!"
+        })
         }else{
-          return res.status(400).json('Please enter correct email and password' );
+          return res.status(401).json({
+            "error": "Authentication failed!"
+          })
         }
       }
       else{
@@ -36,11 +50,12 @@ router.route('/add').post(async(req, res) => {
   const username = req.body.username;
 
   try {
+    const hashedPassword = await bcrypt.hash(password,10);
     const user = await User.findOne({ email });
     if (user) {
       return res.status(400).json('Email already exists' );
     }
-    const newUser = new User({email,password,username});
+    const newUser = new User({email,password:hashedPassword,username});
   
     await newUser.save();
     return res.status(201).json('User created successfully' );

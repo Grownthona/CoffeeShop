@@ -1,7 +1,6 @@
 import React,{ useState } from "react";
 
-import { Link } from 'react-router-dom';
-import { BsCart2 } from "react-icons/bs";
+import { Link ,Navigate} from 'react-router-dom';
 import img1 from '../Products/images/facebook.png'
 import img2 from '../Products/images/instagram.png'
 import img4 from '../Products/images/pinterest.png'
@@ -11,6 +10,7 @@ import './Loginstyles/Login.css';
 export default function SignIn(){
 
     const [formData, setFormData] = useState({ email: '', password: ''});
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const handleChange = (e) =>{
         const { name, value } = e.target;
@@ -27,10 +27,19 @@ export default function SignIn(){
             });
             const data = await response.json();
             console.log(data);
+            if (response.ok) {
+              setLoggedIn(true);
+            } 
           } catch (error) {
             console.error(error);
           }
       };
+
+      if (loggedIn) {
+        // Redirect to another page after successful login
+        localStorage.setItem('session', JSON.stringify(formData.email));
+        return <Navigate to="/checkout" />;
+      }
     return(
     <div>
       <div className="navbar">
@@ -45,7 +54,7 @@ export default function SignIn(){
                     <div className="social-link"><a href="https://www.instagram.com/"><img src={img2} alt="Instagram"/></a></div>
                     <div className="social-link"><a href="https://www.pinterest.com/"><img src={img4} alt="Social Icon 3"/></a></div>
                     <div className="social-link"><Link to="/SignUp">
-                    <button class="button-7" role="button">Sign Up</button></Link></div>
+                    <button className="button-7" role="button">Sign Up</button></Link></div>
                 </ul>
             </div> 
       <div className='authentication-form'>

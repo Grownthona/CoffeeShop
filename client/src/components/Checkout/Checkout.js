@@ -14,12 +14,10 @@ export default function Checkout() {
     const [cartItems, setCartItems] = useState([]);
     const [productItems, setProductItems] = useState([]);
     const [cartPrice, setTotalPrice] = useState(0);
-    
-    
     const savedCartItems = localStorage.getItem('cartItems');
+    const userlogin = localStorage.getItem('session');
 
     useEffect(() => {
-        // Load cart items from localStorage when the component mounts
         if (savedCartItems) {
           setCartItems(JSON.parse(savedCartItems));
         }
@@ -27,12 +25,12 @@ export default function Checkout() {
      
     
       useEffect(() => {
-        // Save cart items to localStorage whenever the cartItems state changes
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
     
       }, [cartItems]);
 
       useEffect(() => {
+        //console.log(userlogin);
         const transferredItems = cartItems.map((cartItem) => ({
           name: cartItem.name,
           quantity: cartItem.quantity,
@@ -114,7 +112,6 @@ export default function Checkout() {
        <div className="py-5 text-center">
          
          <h2>Checkout form</h2>
-         <p className="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
        </div>
 
        <div className="row">
@@ -173,7 +170,7 @@ export default function Checkout() {
 
              <div className="mb-3">
                <label for="email">Email <span className="text-muted">(Optional)</span></label>
-               <input type="email" className="form-control" id="email" placeholder="you@example.com" />
+               <input type="email" className="form-control" id="email"/>
                <div className="invalid-feedback">
                  Please enter a valid email address for shipping updates.
                </div>

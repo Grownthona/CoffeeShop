@@ -2,7 +2,7 @@ import React, { useEffect,useState} from 'react';
 
 //import { useParams } from 'react-router-dom';
 import './Cart.css';
-import { Link } from 'react-router-dom';
+import { Link ,Navigate} from 'react-router-dom';
 import { BsCart2 } from "react-icons/bs";
 import img1 from '../Products/images/facebook.png'
 import img2 from '../Products/images/instagram.png'
@@ -16,9 +16,10 @@ export default function Cart() {
   const [quantityMap, setQuantityMap] = useState({});
 
   const savedCartItems = localStorage.getItem('cartItems');
+  const userlogin = localStorage.getItem('session');
 
   useEffect(() => {
-    // Load cart items from localStorage when the component mounts
+  
     if (savedCartItems) {
       setCartItems(JSON.parse(savedCartItems));
     }
@@ -26,7 +27,7 @@ export default function Cart() {
  
 
   useEffect(() => {
-    // Save cart items to localStorage whenever the cartItems state changes
+    
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
   }, [cartItems]);
@@ -34,7 +35,7 @@ export default function Cart() {
 
 
   useEffect(() => {
-    // Loop through cartItems and perform operations
+    
     cartItems.forEach(item => {
         setQuantityMap(prevMap => ({
             ...prevMap,
@@ -47,7 +48,7 @@ export default function Cart() {
           }));
           //setTotalPrice(total+item.price);
     });
-  }, [cartItems]); // Run the effect whenever cartItems changes
+  }, [cartItems]); 
 
 
   const handleIncrement = (productId,productPrice,Product) => {
@@ -93,6 +94,7 @@ export default function Cart() {
     }
   
   };
+
 
   const removeCartItem = (itemToRemove) => {
     const updatedCartItems = cartItems.filter(item => item !== itemToRemove);
@@ -144,7 +146,6 @@ export default function Cart() {
                 <div className='card-quantity'>
                   <h2>Cart</h2>
                   {cartItems && cartItems.map((item, index) => {
-                    
                     const base64Data = btoa(String.fromCharCode(...new Uint8Array(item.imageSrc.data.data))
                     );
                     return(
@@ -170,13 +171,11 @@ export default function Cart() {
                     <div className='quantity'>
                       <div className="quantity-controlss">
                         <button onClick={() => handleDecrement(item._id,item.price,item)} className="quantity-btn minus">-</button>
-                                <span className="quantityy">{quantityMap[item._id] || 1}</span>
+                          <span className="quantityy">{quantityMap[item._id] || 1}</span>
                         <button onClick={() => handleIncrement(item._id,item.price,item)} className="quantity-btn plus">+</button>
                       </div>
                       <div className='price'>
-                      
-                        <h3>{item.cartPrice} Tk</h3>
-                        
+                          <h3>{item.cartPrice} Tk</h3>
                       </div>
                     </div>
                   </div>
@@ -194,13 +193,15 @@ export default function Cart() {
                   <p>{calculateTotalPrice()} Tk</p>
                 </div>
               </div>
-              <div className='checkout-btn'><button className="button-15" role="button">Go to Checkout</button></div>
+              {userlogin ?
+                <div className='checkout-btn'><button className="button-15" role="button"><Link to="/checkout"style={{textDecoration: 'none',color:'white'}}>Go to Checkout</Link></button></div>
+              :
+                <div className='checkout-btn'><button className="button-15" role="button"><Link to="/SignIn"style={{textDecoration: 'none',color:'white'}}>Go to Checkout</Link></button></div>
+              }
             </div>
           </div>
-          
         </div>
-      </section>
-                   
+      </section>         
     </div>
   );
 }
