@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require("cors");
 const app = express();
+
 dotenv.config()
+const db = process.env.DATABASE
+const PORT = process.env.PORT || 5000
+
 app.use(cors({
   origin:"http://localhost:3000",
 }))
@@ -24,7 +28,7 @@ app.use('/multi',multiimg);
 app.use('/checkout',checkout);
 mongoose
   .connect(
-    'mongodb+srv://mongr:yw46DNwYWt4@cluster0.htcqlu9.mongodb.net/bakery?retryWrites=true&w=majority'
+    db
   )
   .then(result => {
     console.log("MongoDB database connection established successfully");
@@ -41,4 +45,4 @@ app.get("/api",(req,res)=>{
 })
 */
     
-app.listen(5000,()=>{console.log("Server started on port 5000")})
+app.listen(PORT,()=>{console.log(`Server start at port no ${PORT}`)})
