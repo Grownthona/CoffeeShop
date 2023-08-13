@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 dotenv.config();
 //const db = process.env.DATABASE
 const PORT = 5000;
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 app.use(cors(
   {
@@ -21,8 +21,8 @@ app.use(cors(
 app.get("/", (req, res) => {
   res.json("Hello");
 })
-app.use(bodyParser.json());
-//app.use(express.json());
+//app.use(bodyParser.json());
+app.use(express.json());
 //app.use(express.static('public'));
 app.use(express.static('uploads'));
 
