@@ -37,7 +37,7 @@ export default function Product(){
       useEffect(() => {
         const fetchProduct = async () => {
             try {
-              const response = await axios.get(`https://dough-bakery.vercel.app/products`, {
+              const response = await axios.get(`/products`, {
                 withCredentials: true
               });
           
