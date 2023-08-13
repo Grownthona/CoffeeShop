@@ -49,7 +49,7 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/users/add', {
+      const response = await fetch('https://dough-bakery.vercel.app/users/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

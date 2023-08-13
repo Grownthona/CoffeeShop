@@ -7,7 +7,7 @@ export default function ProductDetails() {
 
     useEffect(() => {
         const fetchProduct = async () => {
-          const response = await fetch(`http://localhost:5000/products/productsdetail/${id}`);
+          const response = await fetch(`https://dough-bakery.vercel.app/products/productsdetail/${id}`);
           const data = await response.json();
           setProduct(data);
         };

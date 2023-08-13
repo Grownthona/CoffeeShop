@@ -13,7 +13,6 @@ export default function Checkout() {
 
     const [cartItems, setCartItems] = useState([]);
     const [productItems, setProductItems] = useState([]);
-    const [cartPrice, setTotalPrice] = useState(0);
     const savedCartItems = localStorage.getItem('cartItems');
     const userlogin = localStorage.getItem('session');
 
@@ -50,7 +49,7 @@ export default function Checkout() {
         const totalPurchasePrice = cartItems.reduce((total, item) => total + (item.cartPrice || 0), 0);
         console.log(productItems);
         try {
-          const response = await fetch('http://localhost:5000/checkout/addcheckout', {
+          const response = await fetch('https://dough-bakery.vercel.app/checkout/addcheckout', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
