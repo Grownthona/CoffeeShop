@@ -27,10 +27,9 @@ export default function Product(){
 
         fetch('products',{
           method:"GET",
-          credentials: "include" 
         }) // replace with your server-side route
           .then(response => response.json())
-          .then(data => console.log(data))
+          .then(data => setFormData(data))
           .catch(error => console.log(error));
       }, []);
 
