@@ -97,7 +97,7 @@ export default function Home(){
                                 <p>Coffee, Nutella,Peanuats and Coconut All mixed together.</p>
                             </div>
                         </div>
-                        
+                        <h1>LALA</h1>
                     </div>
                 </div>
             </div>
