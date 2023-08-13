@@ -45,7 +45,7 @@ const upload = multer({ storage: storage,
 
 router.route('/').get(async(req, res) => {
     await Product.find({})
-      .then(data => res.send(data))
+      .then(data => res.json(data))
       .catch(err => res.status(400).json('Error: ' + err));
   });
   
