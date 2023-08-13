@@ -12,7 +12,7 @@ const PORT = 5000;
 
 app.use(cors(
   {
-      origin: ["https://dough-bakery-app.vercel.app/"],
+      origin: "https://dough-bakery-app.vercel.app",
       methods: ["POST", "GET"],
       credentials: true
   }
