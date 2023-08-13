@@ -19,7 +19,7 @@ export default function Home(){
            <div className="navbar">
                 <div className="navbar-logo" href="#"><Link to="/"><img src={logo} alt="logo"/></Link></div>
                 <ul className="navbar-menu">
-                    <li><Link to="/Products">Menu</Link></li>
+                    <li><Link to="/products">Menu</Link></li>
                     <li><Link to="/Products">Contract</Link></li>
                     <li><Link to="/Products">About Us</Link></li>
                 </ul>
