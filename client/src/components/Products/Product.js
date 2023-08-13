@@ -40,7 +40,7 @@ export default function Product(){
 
           const fetchProduct = async () => {
             try {
-              const response = await axios.get(`https://dough-bakery.vercel.app/products`, {
+              const response = await fetch(`https://dough-bakery.vercel.app/products`, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json', 
