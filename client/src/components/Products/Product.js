@@ -6,6 +6,7 @@ import img1 from './images/facebook.png'
 import img2 from './images/instagram.png'
 import img4 from './images/pinterest.png'
 import { BsCart2 } from "react-icons/bs";
+import axios from 'axios';
 import './Product.css';
 
 
@@ -35,13 +36,18 @@ export default function Product(){
       */
       useEffect(() => {
         const fetchProduct = async () => {
-          const response = await fetch(`https://dough-bakery.vercel.app/products`,{
-            credentials: 'include'
-          });
-          const data = await response.json();
-          console.log(data);
-          setFormData(data);
-        };
+            try {
+              const response = await axios.get(`https://dough-bakery.vercel.app/products`, {
+                withCredentials: true
+              });
+          
+              const data = response.data;
+              console.log(data);
+              setFormData(data);
+            } catch (error) {
+              console.error(error);
+            }
+          };
         fetchProduct();
       }, []);
       
