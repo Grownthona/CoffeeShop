@@ -22,29 +22,21 @@ export default function Product(){
     //localStorage.clear();
 
     
-    /*useEffect(() => {
+    useEffect(() => {
          //console.log(cart);
 
         fetch('products',{
           method:"GET",
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }) // replace with your server-side route
           .then(response => response.json())
           .then(data => setFormData(data))
           .catch(error => console.log(error));
       }, []);
-      */
-      useEffect(() => {
-        const fetchProduct = async () => {
-          const response = await fetch(`/products`,{
-            credentials: 'include'
-          });
-          const data = await response.json();
-          console.log(data);
-          setFormData(data);
-        };
-        fetchProduct();
-      }, []);
       
+     
 
       useEffect(() => {
         // Load cart items from localStorage when the component mounts
