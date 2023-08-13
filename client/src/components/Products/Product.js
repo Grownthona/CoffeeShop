@@ -24,8 +24,10 @@ export default function Product(){
     
     useEffect(() => {
          //console.log(cart);
-        fetch('/products',{
+
+        fetch('products',{
           method:"GET",
+          credentials: "include" 
         }) // replace with your server-side route
           .then(response => response.json())
           .then(data => setFormData(data))
