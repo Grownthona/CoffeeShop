@@ -5,9 +5,10 @@ const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 
-dotenv.config()
+dotenv.config();
 //const db = process.env.DATABASE
-const PORT = process.env.PORT || 5000
+const PORT = 5000;
+app.use(bodyParser.json());
 
 app.use(cors(
   {
@@ -33,7 +34,7 @@ const checkout = require('./routes/checkout');
     
 app.use('/users', usersRouter);
 app.use('/api/',fileRouter);
-app.use('/products/',productRouter);
+app.use('/products',productRouter);
 app.use('/multi',multiimg);
 app.use('/checkout',checkout);
 mongoose
