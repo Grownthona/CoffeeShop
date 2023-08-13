@@ -24,7 +24,7 @@ export default function Product(){
     
     useEffect(() => {
          //console.log(cart);
-        fetch('/Products',{
+        fetch('/products',{
           method:"GET",
         }) // replace with your server-side route
           .then(response => response.json())

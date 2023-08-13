@@ -48,7 +48,7 @@ function App() {
         <Route path='/test' element={<ImageUploadForm/>}></Route>
         <Route path='/SignUp' element={<SignUp/>}></Route>
         <Route path='/SignIn' element={<SignIn/>}></Route>
-        <Route path='/Products' element={<Product/>}></Route>
+        <Route path='/products' element={<Product/>}></Route>
         <Route path='/productsdetail/:id' element={<ProductDetails/>}></Route>
         <Route path='/cart' element={<Cart/>}></Route>
         <Route path='/checkout' element={<Checkout/>}></Route>
