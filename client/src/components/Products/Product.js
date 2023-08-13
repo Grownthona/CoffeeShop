@@ -30,7 +30,7 @@ export default function Product(){
           credentials: "include" 
         }) // replace with your server-side route
           .then(response => response.json())
-          .then(data => setFormData(data))
+          .then(data => console.log(data))
           .catch(error => console.log(error));
       }, []);
 
