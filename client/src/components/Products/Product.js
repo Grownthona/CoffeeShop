@@ -6,7 +6,6 @@ import img1 from './images/facebook.png'
 import img2 from './images/instagram.png'
 import img4 from './images/pinterest.png'
 import { BsCart2 } from "react-icons/bs";
-import axios from 'axios';
 import './Product.css';
 
 
@@ -36,18 +35,13 @@ export default function Product(){
       */
       useEffect(() => {
         const fetchProduct = async () => {
-            try {
-              const response = await axios.get(`/products`, {
-                withCredentials: true
-              });
-          
-              const data = await response.json();
-              console.log(data);
-              setFormData(data);
-            } catch (error) {
-              console.error(error);
-            }
-          };
+          const response = await fetch(`/products`,{
+            credentials: 'include'
+          });
+          const data = await response.json();
+          console.log(data);
+          setFormData(data);
+        };
         fetchProduct();
       }, []);
       
