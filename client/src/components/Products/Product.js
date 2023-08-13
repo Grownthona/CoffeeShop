@@ -19,6 +19,7 @@ export default function Product(){
     const [quantityMap, setQuantityMap] = useState({});
 
     const savedCartItems = localStorage.getItem('cartItems');
+    axios.defaults.withCredentials = true;
 
     //localStorage.clear();
 
