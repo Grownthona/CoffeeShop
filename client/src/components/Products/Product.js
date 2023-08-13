@@ -25,7 +25,7 @@ export default function Product(){
     useEffect(() => {
          //console.log(cart);
 
-        fetch(`products`,{
+        fetch(`https://dough-bakery.vercel.app/products`,{
           method:"GET",
           headers: {
             'Content-Type': 'application/json',
