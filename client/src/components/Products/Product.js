@@ -7,6 +7,7 @@ import img2 from './images/instagram.png'
 import img4 from './images/pinterest.png'
 import { BsCart2 } from "react-icons/bs";
 import './Product.css';
+import axios from 'axios';
 
 
 export default function Product(){
@@ -24,7 +25,7 @@ export default function Product(){
     
     useEffect(() => {
          //console.log(cart); 
-          const fetchProduct = async () => {
+          /*const fetchProduct = async () => {
             const response = await fetch(`https://dough-bakery.vercel.app/products`,{ 
             method:"GET",
             credentials: 'include',
@@ -34,12 +35,26 @@ export default function Product(){
             const data = await response.json();
             console.log(data);
             setFormData(data);
+          };*/
+
+          const fetchProduct = async () => {
+            try {
+              const response = await axios.get(`https://dough-bakery.vercel.app/products`, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json', 
+                  }
+              });
+              const data = response.data;
+              console.log(data);
+              setFormData(data);
+            } catch (error) {
+              console.error(error);
+            }
           };
+          
         fetchProduct();
     }, []);
-      
-     
-
       useEffect(() => {
         // Load cart items from localStorage when the component mounts
         if (savedCartItems) {
