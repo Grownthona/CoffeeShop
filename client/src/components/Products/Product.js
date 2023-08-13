@@ -45,7 +45,7 @@ export default function Product(){
                     'Content-Type': 'application/json', 
                   }
               });
-              const data = response.data;
+              const data = await response.json();
               console.log(data);
               setFormData(data);
             } catch (error) {
