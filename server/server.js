@@ -16,6 +16,10 @@ app.use(cors(
   }
 ));
 
+app.get("/", (req, res) => {
+  res.json("Hello");
+})
+
 app.use(express.json());
 //app.use(express.static('public'));
 app.use(express.static('uploads'));
