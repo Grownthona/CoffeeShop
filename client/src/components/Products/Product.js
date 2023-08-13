@@ -22,7 +22,7 @@ export default function Product(){
     //localStorage.clear();
 
     
-    useEffect(() => {
+    /*useEffect(() => {
          //console.log(cart);
 
         fetch('products',{
@@ -32,6 +32,17 @@ export default function Product(){
           .then(data => setFormData(data))
           .catch(error => console.log(error));
       }, []);
+      */
+      useEffect(() => {
+        const fetchProduct = async () => {
+          const response = await fetch(`https://dough-bakery.vercel.app/products`);
+          const data = await response.json();
+          console.log(data);
+          setFormData(data);
+        };
+        fetchProduct();
+      }, []);
+      
 
       useEffect(() => {
         // Load cart items from localStorage when the component mounts
