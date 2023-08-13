@@ -23,18 +23,19 @@ export default function Product(){
 
     
     useEffect(() => {
-         //console.log(cart);
-
-        fetch(`/products`,{
-          method:"GET",
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }) // replace with your server-side route
-          .then(response => response.json())
-          .then(data => setFormData(data))
-          .catch(error => console.log(error));
-      }, []);
+         //console.log(cart); 
+          const fetchProduct = async () => {
+            const response = await fetch(`/products`,{ 
+            method:"GET",
+            headers: {
+              'Content-Type': 'application/json',
+            }});
+            const data = await response.json();
+            console.log(data);
+            setFormData(data);
+          };
+        fetchProduct();
+    }, []);
       
      
 
