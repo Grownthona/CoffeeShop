@@ -35,7 +35,9 @@ export default function Product(){
       */
       useEffect(() => {
         const fetchProduct = async () => {
-          const response = await fetch(`https://dough-bakery.vercel.app/products`);
+          const response = await fetch(`https://dough-bakery.vercel.app/products`,{
+            credentials: 'include'
+          });
           const data = await response.json();
           console.log(data);
           setFormData(data);
