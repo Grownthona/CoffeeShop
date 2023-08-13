@@ -5,12 +5,17 @@ const cors = require("cors");
 const app = express();
 
 dotenv.config()
-const db = process.env.DATABASE
+//const db = process.env.DATABASE
 const PORT = process.env.PORT || 5000
 
-app.use(cors({
-  origin:"http://localhost:3000",
-}))
+app.use(cors(
+  {
+      origin: ["https://dough-bakery-backend.vercel.app"],
+      methods: ["POST", "GET"],
+      credentials: true
+  }
+));
+
 app.use(express.json());
 //app.use(express.static('public'));
 app.use(express.static('uploads'));
@@ -28,7 +33,7 @@ app.use('/multi',multiimg);
 app.use('/checkout',checkout);
 mongoose
   .connect(
-    db
+    'mongodb+srv://mongr:yw46DNwYWt4@cluster0.htcqlu9.mongodb.net/bakery?retryWrites=true&w=majority'
   )
   .then(result => {
     console.log("MongoDB database connection established successfully");
