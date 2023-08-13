@@ -1,10 +1,10 @@
 const router = require('express').Router();
-//const bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 const multer = require('multer');
 const path = require('path');
 var fs = require('fs');
 
-
+router.use(bodyParser.json());
 
 let Product = require('../models/productmodel');
 const CartItem = require('../models/cartItem');
