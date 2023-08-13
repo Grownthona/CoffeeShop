@@ -54,7 +54,7 @@ router.route('/').get(async(req, res) => {
     const productId = req.params.id;
     try {
       const product = await Product.findById(productId);
-      res.json(product);
+      res.send(product);
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Server Error' });
