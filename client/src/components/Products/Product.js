@@ -27,6 +27,7 @@ export default function Product(){
           const fetchProduct = async () => {
             const response = await fetch(`https://dough-bakery.vercel.app/products`,{ 
             method:"GET",
+            credentials: 'include',
             headers: {
               'Content-Type': 'application/json',
             }});
