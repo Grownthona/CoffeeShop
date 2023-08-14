@@ -29,7 +29,7 @@ app.use("/users", async(req, res) => {
     res.json(prod);
   } catch (error) {
     console.error(error);
-    res.status(504).json({ message: 'Error fetching Products' });
+    res.status(404).json({ message: 'Error fetching Products' });
   }
 })
 
