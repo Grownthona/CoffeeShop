@@ -27,7 +27,7 @@ app.use("/users", async(req, res) => {
   try {
     const prod = await User.find({})
     console.log(prod);
-    res.send(prod);
+    res.send("paina");
   } catch (error) {
     console.error(error);
     res.status(404).json({ message: 'Error fetching Products' });
