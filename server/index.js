@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
-
+let User = require('./models/usermodel');
 dotenv.config();
 //const db = process.env.DATABASE
 const PORT = 'https://dough-bakery-backend.vercel.app/';
@@ -18,8 +18,14 @@ app.use(cors(
   }
 ));
 
-app.use("/", (req, res) => {
+app.use("/api", (req, res) => {
   res.json("Hello");
+})
+
+app.use("/users", (req, res) => {
+  User.find()
+  .then(users => res.json(users))
+  .catch(err => res.status(400).json('Error: ' + err));
 })
 
 //app.use(bodyParser.json());
