@@ -22,10 +22,10 @@ app.use("/api", (req, res) => {
   res.json("Hello");
 })
 
-app.use("/users", async(req, res) => {
+/*app.use("/users", async(req, res) => {
     res.json("paina");
 })
-
+*/
 //app.use(bodyParser.json());
 app.use(express.json());
 //app.use(express.static('public'));
@@ -37,7 +37,7 @@ const productRouter = require('./routes/products');
 const multiimg = require('./routes/multipleimage');
 const checkout = require('./routes/checkout');
     
-//app.use('/users', usersRouter);
+app.use('/users', usersRouter);
 app.use('/api/',fileRouter);
 app.use('/products',productRouter);
 app.use('/multi',multiimg);
