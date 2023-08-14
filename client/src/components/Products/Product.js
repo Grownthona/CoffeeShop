@@ -37,6 +37,13 @@ export default function Product(){
             console.log(data);
             setFormData(data);
           };*/
+          /*fetch('/Products',{
+            method:"GET",
+          }) // replace with your server-side route
+            .then(response => response.json())
+            .then(data => setFormData(data))
+            .catch(error => console.log(error));
+        }, []);*/
 
           const fetchProduct = async () => {
             try {
