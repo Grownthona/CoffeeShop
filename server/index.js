@@ -23,15 +23,7 @@ app.use("/api", (req, res) => {
 })
 
 app.use("/users", async(req, res) => {
-
-  try {
-    const prod = await User.find({})
-    console.log(prod);
     res.json("paina");
-  } catch (error) {
-    console.error(error);
-    res.status(404).json({ message: 'Error fetching Products' });
-  }
 })
 
 //app.use(bodyParser.json());
