@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 
 dotenv.config();
 //const db = process.env.DATABASE
-const PORT = 5000;
+const PORT = 'https://dough-bakery-backend.vercel.app/';
 //app.use(bodyParser.json());
 
 app.use(cors(
