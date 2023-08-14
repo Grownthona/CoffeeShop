@@ -44,13 +44,14 @@ const upload = multer({ storage: storage,
 
 
 router.route('/').get(async(req, res) => {
-  try {
+  res.json("Product");
+  /*try {
     const prod = await Product.find({})
     res.json(prod);
   } catch (error) {
     console.error(error);
     res.status(504).json({ message: 'Error fetching Products' });
-  }
+  }*/
    /* await Product.find({})
       .then(data => res.json(data))
       .catch(err => res.status(400).json('Error: ' + err));*/
