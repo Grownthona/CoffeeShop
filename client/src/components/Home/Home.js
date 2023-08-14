@@ -20,8 +20,8 @@ export default function Home(){
                 <div className="navbar-logo" href="#"><Link to="/"><img src={logo} alt="logo"/></Link></div>
                 <ul className="navbar-menu">
                     <li><Link to="/products">Menu</Link></li>
-                    <li><Link to="/Products">Contract</Link></li>
-                    <li><Link to="/Products">About Us</Link></li>
+                    <li><Link to="/products">Contract</Link></li>
+                    <li><Link to="/products">About Us</Link></li>
                 </ul>
                 <ul className="navbar-social">
                     <div className="social-link"><a href="https://www.facebook.com/"><img src={img1} alt="facebook"/></a></div>

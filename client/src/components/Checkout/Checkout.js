@@ -49,7 +49,7 @@ export default function Checkout() {
         const totalPurchasePrice = cartItems.reduce((total, item) => total + (item.cartPrice || 0), 0);
         console.log(productItems);
         try {
-          const response = await fetch('https://dough-bakery.vercel.app/checkout/addcheckout', {
+          const response = await fetch('https://dough-bakery-backend.vercel.app/checkout/addcheckout', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -96,9 +96,9 @@ export default function Checkout() {
     <div className="navbar">
                 <div className="navbar-logo" href="#"><Link to="/"><img src={logo} alt="logo"/></Link></div>
                 <ul className="navbar-menu">
-                    <li><Link to="/Products">Menu</Link></li>
-                    <li><Link to="/Products">Contract</Link></li>
-                    <li><Link to="/Products">About Us</Link></li>
+                    <li><Link to="/products">Menu</Link></li>
+                    <li><Link to="/products">Contract</Link></li>
+                    <li><Link to="/products">About Us</Link></li>
                 </ul>
                 <ul className="navbar-social">
                     <div className="social-link"><a href="https://www.facebook.com/"><img src={img1} alt="facebook"/></a></div>
