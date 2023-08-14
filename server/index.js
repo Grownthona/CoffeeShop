@@ -45,7 +45,7 @@ const productRouter = require('./routes/products');
 const multiimg = require('./routes/multipleimage');
 const checkout = require('./routes/checkout');
     
-app.use('/users', usersRouter);
+//app.use('/users', usersRouter);
 app.use('/api/',fileRouter);
 app.use('/products',productRouter);
 app.use('/multi',multiimg);
