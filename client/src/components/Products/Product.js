@@ -67,9 +67,8 @@ export default function Product(){
         if (savedCartItems) {
           setCartItems(JSON.parse(savedCartItems));
         }
-      }, []);
-
-
+      }, [])
+      
       useEffect(() => {
         // Save cart items to localStorage whenever the cartItems state changes
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
