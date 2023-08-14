@@ -21,9 +21,7 @@ app.use(cors(
 app.get("/", (req, res) => {
   res.json("Hello");
 })
-app.get("/products", (req, res) => {
-  res.json("Products");
-})
+
 //app.use(bodyParser.json());
 app.use(express.json());
 //app.use(express.static('public'));
