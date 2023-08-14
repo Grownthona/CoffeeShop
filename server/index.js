@@ -22,9 +22,15 @@ app.use("/api", (req, res) => {
   res.json("Hello");
 })
 
-app.use("/users", (req, res) => {
-  const users = User.find();
-  res.json(users);
+app.use("/users", async(req, res) => {
+
+  try {
+    const prod = await User.find({})
+    res.json(prod);
+  } catch (error) {
+    console.error(error);
+    res.status(504).json({ message: 'Error fetching Products' });
+  }
 })
 
 //app.use(bodyParser.json());
