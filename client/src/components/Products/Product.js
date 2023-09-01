@@ -168,6 +168,10 @@ export default function Product(){
                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"></input>
   <label class="form-check-label" for="flexRadioDefault1">
     Default radio
+  </label> 
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"></input>
+  <label class="form-check-label" for="flexRadioDefault2">
+    Default checked radio
   </label>
                             <Form>
                                 {['checkbox'].map((type) => (
