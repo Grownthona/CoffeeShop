@@ -164,29 +164,24 @@ export default function Product(){
                 <h3>Catagories</h3>
                     <div className="box">
                       
-                        <div className="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"></input>
-  <label class="form-check-label" for="flexRadioDefault1">
-    Default radio
-  </label> 
-  <br></br>
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"></input>
-  <label class="form-check-label" for="flexRadioDefault2">
-    Default checked radio
-  </label>
-                            <Form>
-                                {['checkbox'].map((type) => (
-                                    <div key={`reverse-${type}`} className="mb-3">
-                                        
-                                        <Form.Check type={type}  name="group1" id={`reverse-${type}-1`} label={`Cake`} onClick={() => handleFilter('Cake')} />
-                                        <Form.Check type={type}  name="group2" id={`reverse-${type}-2`} label={`Pastry`} onClick={() => handleFilter('Pastry')}/>
-                                        <Form.Check type={type} id={`reverse-${type}-3`} label={`Muffin`} onClick={() => handleFilter('Muffin')}/>
-                                        <Form.Check type={type} id={`reverse-${type}-4`} label={`Brownie`} onClick={() => handleFilter('Brownies')}/>
-                                        <Form.Check type={type} id={`reverse-${type}-5`} label={`Cookie`} onClick={() => handleFilter('Cookie')}/>
-                                        <Form.Check type={type} id={`reverse-${type}-6`} label={`Donut`} onClick={() => handleFilter('Donut')}/>
-                                    </div>
-                                ))}
-                            </Form>
+                        <div className="form-check-radio">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={() => handleFilter('Cake')}></input>
+                                       <label class="form-check-label" for="flexRadioDefault1">Cake</label> 
+                                       <br></br>
+                                       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick={() => handleFilter('Pastry')}></input>
+                                       <label class="form-check-label" for="flexRadioDefault2">Pastry</label> 
+                                       <br></br>
+                                       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" onClick={() => handleFilter('Muffin')}></input>
+                                       <label class="form-check-label" for="flexRadioDefault3">Muffin</label>
+                                       <br></br>
+                                       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" onClick={() => handleFilter('Brownies')}></input>
+                                       <label class="form-check-label" for="flexRadioDefault4">Brownie</label> 
+                                       <br></br>
+                                       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5" onClick={() => handleFilter('Cookie')}></input>
+                                       <label class="form-check-label" for="flexRadioDefault5">Cookie</label> 
+                                       <br></br>
+                                       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6" onClick={() => handleFilter('Donut')}></input>
+                                       <label class="form-check-label" for="flexRadioDefault6">Donut</label> 
                         </div>
                     </div>
                 </div>

@@ -121,8 +121,17 @@ body {
     margin-bottom: 3px;
     margin-top: 3px;
 }
+.form-check-radio{
+  padding: 2rem;
+}
 .form-check{
   padding-top: 1rem;
+}
+
+input[type=radio] {
+  margin: 8px 0;
+ 
+  cursor: pointer;
 }
 .filter-box{
     width: 20%;
