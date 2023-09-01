@@ -40,7 +40,7 @@ export default function Home(){
                             <div className="elementor-divider-container"></div>
                         </div>
                         <div className="header-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Step inside and let your senses be serenaded by the scent of freshly baked goodness. Our passion for baking is your pleasure. Come and discover a world of irresistible treats that define the essence of indulgence.</p>
                         </div>
                     </div>
                     <div className="bg-img">
