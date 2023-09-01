@@ -13,6 +13,7 @@ import ProductDetails from './components/Products/ProductDetails';
 //import Test from './components/Test';
 import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout';
+import Reservation from './components/Reservation/Reservation';
 /*
 import React,{useEffect,useState} from 'react'
 
@@ -52,6 +53,7 @@ function App() {
         <Route path='/productsdetail/:id' element={<ProductDetails/>}></Route>
         <Route path='/cart' element={<Cart/>}></Route>
         <Route path='/checkout' element={<Checkout/>}></Route>
+        <Route path='/reservation' element={<Reservation/>}></Route>
       </Routes>
     </Router>
     

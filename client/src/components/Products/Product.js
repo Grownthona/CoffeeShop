@@ -163,7 +163,12 @@ export default function Product(){
                 <div className="catagories">
                 <h3>Catagories</h3>
                     <div className="box">
+                      
                         <div className="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"></input>
+  <label class="form-check-label" for="flexRadioDefault1">
+    Default radio
+  </label>
                             <Form>
                                 {['checkbox'].map((type) => (
                                     <div key={`reverse-${type}`} className="mb-3">
