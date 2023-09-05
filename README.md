@@ -49,19 +49,6 @@ To explore and contribute to the Dough Bakery project, follow these steps:
   npm start
 ```
 
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm run start
-```
-
-
 ## Tech Stack
 
 **Client:** React
